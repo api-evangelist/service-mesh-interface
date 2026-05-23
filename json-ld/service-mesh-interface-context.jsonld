@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@vocab": "https://smi-spec.io/vocab/",
+    "schema": "http://schema.org/",
+    "k8s": "https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "version": "schema:softwareVersion",
+
+    "SMI": "https://smi-spec.io/vocab/ServiceMeshInterface",
+    "TrafficTarget": "https://smi-spec.io/vocab/TrafficTarget",
+    "HTTPRouteGroup": "https://smi-spec.io/vocab/HTTPRouteGroup",
+    "TCPRoute": "https://smi-spec.io/vocab/TCPRoute",
+    "UDPRoute": "https://smi-spec.io/vocab/UDPRoute",
+    "TrafficSplit": "https://smi-spec.io/vocab/TrafficSplit",
+    "TrafficMetrics": "https://smi-spec.io/vocab/TrafficMetrics",
+
+    "destination": "https://smi-spec.io/vocab/destination",
+    "sources": "https://smi-spec.io/vocab/sources",
+    "rules": "https://smi-spec.io/vocab/rules",
+    "matches": "https://smi-spec.io/vocab/matches",
+    "pathRegex": "https://smi-spec.io/vocab/pathRegex",
+    "methods": "https://smi-spec.io/vocab/methods",
+    "headers": "https://smi-spec.io/vocab/headers",
+    "ports": "https://smi-spec.io/vocab/ports",
+    "service": "https://smi-spec.io/vocab/service",
+    "backends": "https://smi-spec.io/vocab/backends",
+    "weight": "https://smi-spec.io/vocab/weight",
+
+    "edge": "https://smi-spec.io/vocab/edge",
+    "metrics": "https://smi-spec.io/vocab/metrics",
+    "window": "https://smi-spec.io/vocab/window",
+    "timestamp": "schema:dateCreated",
+
+    "ServiceAccount": "k8s:ServiceAccount",
+    "Pod": "k8s:Pod",
+    "Deployment": "k8s:Deployment",
+    "Namespace": "k8s:Namespace",
+
+    "supersededBy": {
+      "@id": "https://www.w3.org/ns/dcat#supersededBy",
+      "@type": "@id"
+    },
+    "archivalDate": {
+      "@id": "schema:dateModified",
+      "@type": "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "successor": {
+      "@id": "https://smi-spec.io/vocab/successor",
+      "@type": "@id"
+    }
+  },
+  "@id": "https://smi-spec.io",
+  "@type": "SMI",
+  "name": "Service Mesh Interface",
+  "description": "A standard interface for service meshes on Kubernetes. CNCF Sandbox project archived 2023-10-03.",
+  "version": "0.6.0",
+  "archivalDate": "2023-10-20",
+  "successor": "https://gateway-api.sigs.k8s.io/mesh/gamma/",
+  "supersededBy": "https://gateway-api.sigs.k8s.io/"
+}

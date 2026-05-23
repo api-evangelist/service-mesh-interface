@@ -1,0 +1,99 @@
+name: Service Mesh Interface (SMI) Vocabulary
+description: |
+  Normative vocabulary of the Service Mesh Interface specification, covering the four
+  API groups (access, specs, split, metrics) and the core concepts they introduce.
+  SMI was a CNCF Sandbox project archived on 2023-10-03; this vocabulary is preserved
+  for historical reference and for migration tooling targeting Kubernetes Gateway API
+  GAMMA, the de facto successor.
+version: '0.6.0'
+status: archived
+archivalDate: '2023-10-20'
+successor: Kubernetes Gateway API (GAMMA)
+successorUrl: https://gateway-api.sigs.k8s.io/mesh/gamma/
+
+concepts:
+  - term: Service Mesh
+    definition: A dedicated infrastructure layer for managing service-to-service communication, observability, and security in a microservices system, typically implemented via sidecar proxies.
+  - term: Traffic Policy
+    definition: Authorization rules governing which workloads (service identities) may send which kinds of traffic to which other workloads.
+  - term: Traffic Management
+    definition: Runtime control over how traffic flows between services, including weighted splitting, mirroring, and progressive delivery.
+  - term: Traffic Telemetry
+    definition: Metrics, traces, and logs describing observed traffic between service mesh participants.
+  - term: Service Identity
+    definition: In SMI, a Kubernetes ServiceAccount used as the cryptographic identity of a workload for authorization purposes.
+  - term: Canary Deployment
+    definition: Progressive delivery pattern that routes a small percentage of traffic to a new version of a service before full cutover.
+  - term: Traffic Edge
+    definition: A directed pairing between two workloads (e.g. pod A talking to pod B) for which metrics are collected.
+
+resourceKinds:
+  - kind: TrafficTarget
+    apiGroup: access.smi-spec.io/v1alpha3
+    definition: Associates a set of traffic rules with a service identity allocated to a group of pods; the unit of authorization in SMI.
+  - kind: HTTPRouteGroup
+    apiGroup: specs.smi-spec.io/v1alpha4
+    definition: A named collection of HTTP route matches (pathRegex, methods, headers) consumed by TrafficTarget and TrafficSplit.
+  - kind: TCPRoute
+    apiGroup: specs.smi-spec.io/v1alpha4
+    definition: A spec resource matching TCP traffic by destination port.
+  - kind: UDPRoute
+    apiGroup: specs.smi-spec.io/v1alpha4
+    definition: A spec resource matching UDP traffic by destination port.
+  - kind: TrafficSplit
+    apiGroup: split.smi-spec.io/v1alpha4
+    definition: Incrementally directs percentages of traffic between backend services for canary, blue/green, and A/B testing rollouts.
+  - kind: TrafficMetrics
+    apiGroup: metrics.smi-spec.io/v1alpha1
+    definition: A per-resource metrics document reporting latency percentiles and success/failure counts over a time window.
+  - kind: TrafficMetricsList
+    apiGroup: metrics.smi-spec.io/v1alpha1
+    definition: Aggregated collection of TrafficMetrics documents, queryable by kind, label selectors, or edges.
+
+metrics:
+  - name: p50_response_latency
+    unit: seconds
+    description: Median (50th percentile) response latency over the time window.
+  - name: p90_response_latency
+    unit: seconds
+    description: 90th percentile response latency over the time window.
+  - name: p99_response_latency
+    unit: seconds
+    description: 99th percentile response latency over the time window.
+  - name: success_count
+    description: Number of successful responses observed in the time window.
+  - name: failure_count
+    description: Number of failed responses observed in the time window.
+
+implementations:
+  - Linkerd
+  - Open Service Mesh (OSM)
+  - Consul Connect
+  - Traefik Mesh
+  - Gloo Mesh
+  - Flagger
+  - Meshery
+  - Argo Rollouts
+  - Istio (via smi-adapter-istio)
+
+relatedStandards:
+  - name: Kubernetes Gateway API
+    url: https://gateway-api.sigs.k8s.io
+    relationship: successor
+  - name: Gateway API GAMMA Initiative
+    url: https://gateway-api.sigs.k8s.io/mesh/gamma/
+    relationship: direct successor for service-mesh use cases
+  - name: Kubernetes Ingress
+    url: https://kubernetes.io/docs/concepts/services-networking/ingress/
+    relationship: predecessor (north-south) to Gateway API
+  - name: Envoy xDS
+    url: https://www.envoyproxy.io/docs/envoy/latest/api/api
+    relationship: underlying data-plane API used by most SMI implementations
+
+archivalNotice: |
+  CNCF archived the Service Mesh Interface project on 2023-10-03. The maintainers stated:
+  "the maintainers have decided to consolidate efforts on a service mesh under the auspices
+  of GAMMA under the Kubernetes SIG Network initiative." The GitHub organization and all
+  repositories were marked read-only on 2023-10-20. New service-mesh configuration work
+  should target Kubernetes Gateway API GAMMA, which reached GA in the Standard Channel
+  with Gateway API v1.1.0.

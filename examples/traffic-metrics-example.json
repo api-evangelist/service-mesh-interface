@@ -1,0 +1,27 @@
+{
+  "kind": "TrafficMetrics",
+  "apiVersion": "metrics.smi-spec.io/v1alpha1",
+  "resource": {
+    "name": "foo-775b9cbd88-ntxsl",
+    "namespace": "foobar",
+    "kind": "Pod"
+  },
+  "edge": {
+    "direction": "to",
+    "side": "client",
+    "resource": {
+      "name": "bar-fb7c8b46f-2plgz",
+      "namespace": "foobar",
+      "kind": "Pod"
+    }
+  },
+  "timestamp": "2026-04-08T22:25:55Z",
+  "window": "30s",
+  "metrics": [
+    { "name": "p99_response_latency", "unit": "seconds", "value": "0.020" },
+    { "name": "p90_response_latency", "unit": "seconds", "value": "0.012" },
+    { "name": "p50_response_latency", "unit": "seconds", "value": "0.005" },
+    { "name": "success_count", "value": "100" },
+    { "name": "failure_count", "value": "0" }
+  ]
+}

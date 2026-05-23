@@ -1,0 +1,23 @@
+# SMI TrafficTarget — canonical example from spec.
+# Source: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-access/v1alpha3/traffic-access.md
+apiVersion: access.smi-spec.io/v1alpha3
+kind: TrafficTarget
+metadata:
+  name: api-service-metrics
+  namespace: default
+spec:
+  destination:
+    kind: ServiceAccount
+    name: api-service
+    namespace: default
+  rules:
+    - kind: TCPRoute
+      name: api-service-port
+    - kind: HTTPRouteGroup
+      name: api-service-routes
+      matches:
+        - metrics
+  sources:
+    - kind: ServiceAccount
+      name: prometheus
+      namespace: default

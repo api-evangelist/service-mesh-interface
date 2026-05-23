@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/service-mesh-interface/json-schema/traffic-split-schema.json",
+  "title": "SMI TrafficSplit",
+  "description": "Service Mesh Interface (SMI) TrafficSplit resource (split.smi-spec.io/v1alpha4). Incrementally directs percentages of traffic between backend services for canary, blue/green, and A/B rollouts. Source: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha4/traffic-split.md",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "const": "split.smi-spec.io/v1alpha4" },
+    "kind": { "const": "TrafficSplit" },
+    "metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "namespace": { "type": "string" }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": ["service", "backends"],
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "Root service FQDN that clients connect to; becomes the traffic distribution point."
+        },
+        "backends": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["service", "weight"],
+            "properties": {
+              "service": { "type": "string" },
+              "weight": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind", "name"],
+            "properties": {
+              "kind": { "type": "string", "enum": ["HTTPRouteGroup"] },
+              "name": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

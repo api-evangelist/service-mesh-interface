@@ -1,0 +1,11 @@
+# SMI UDPRoute — canonical example from spec.
+# Source: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-specs/v1alpha4/traffic-specs.md
+apiVersion: specs.smi-spec.io/v1alpha4
+kind: UDPRoute
+metadata:
+  name: the-routes
+spec:
+  matches:
+    ports:
+      - 989
+      - 990

@@ -1,0 +1,14 @@
+# SMI TrafficSplit — canonical canary example from spec.
+# Source: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha4/traffic-split.md
+# Routes 90% of traffic destined for `website` to v1, 10% to v2.
+apiVersion: split.smi-spec.io/v1alpha4
+kind: TrafficSplit
+metadata:
+  name: canary
+spec:
+  service: website
+  backends:
+    - service: website-v1
+      weight: 90
+    - service: website-v2
+      weight: 10

@@ -1,0 +1,271 @@
+name: Service Mesh Interface (SMI)
+description: |
+  Service Mesh Interface (SMI) was a CNCF Sandbox specification that defined a standard,
+  vendor-neutral set of Kubernetes Custom Resource Definitions (CRDs) for the most common
+  service mesh capabilities: traffic policy, traffic telemetry, and traffic management.
+  SMI's stated mission was "a standard interface for service meshes on Kubernetes," letting
+  operators write portable traffic policy that worked across Linkerd, Open Service Mesh,
+  Consul Connect, Istio (via adapter), Traefik Mesh, Gloo Mesh, and others without lock-in.
+
+  The specification reached v0.6.0 (January 2021 / republished January 2024) and defined four
+  resource groups across distinct API versions: Traffic Access Control (v1alpha3),
+  Traffic Specs (v1alpha4), Traffic Split (v1alpha4), and Traffic Metrics (v1alpha1).
+  Active development ceased in July 2022 when the maintainers shifted focus to the
+  Kubernetes SIG-Network GAMMA initiative inside the Gateway API project.
+
+  CNCF formally archived SMI on October 3, 2023, with the GitHub org and all repositories
+  marked read-only on October 20, 2023. The CNCF announcement stated: "the maintainers have
+  decided to consolidate efforts on a service mesh under the auspices of GAMMA under the
+  Kubernetes SIG Network initiative." Gateway API GAMMA reached GA in the Standard Channel
+  with Gateway API v1.1.0 and is now the de facto Kubernetes standard for service mesh
+  configuration, superseding SMI.
+
+  This profile documents SMI as a historical/archived standard. It is preserved so consumers
+  of the API Evangelist network can (a) recognize legacy SMI manifests still deployed in
+  the wild, (b) understand the conceptual lineage that fed into Gateway API GAMMA, and
+  (c) migrate off SMI to Gateway API.
+url: https://github.com/api-evangelist/service-mesh-interface
+humanURL: https://smi-spec.io
+image: https://avatars.githubusercontent.com/u/59054423
+tags:
+  - Service Mesh
+  - Kubernetes
+  - Traffic Policy
+  - Traffic Management
+  - Traffic Metrics
+  - Standards
+  - CNCF
+  - Archived
+  - Specification
+  - Custom Resource Definitions
+created: '2026-05-22'
+modified: '2026-05-23'
+specificationVersion: '0.18'
+type: Index
+aid: service-mesh-interface
+access: 3rd-Party
+common:
+  - type: Website
+    url: https://smi-spec.io
+  - type: Specification
+    url: https://github.com/servicemeshinterface/smi-spec
+  - type: GitHubOrg
+    url: https://github.com/servicemeshinterface
+  - type: GitHubRepo
+    url: https://github.com/servicemeshinterface/smi-spec
+  - type: License
+    url: https://github.com/servicemeshinterface/smi-spec/blob/main/LICENSE
+    name: Apache-2.0
+  - type: Governance
+    url: https://www.cncf.io
+    name: CNCF (Cloud Native Computing Foundation) Sandbox Project
+  - type: ArchivalNotice
+    url: https://www.cncf.io/blog/2023/10/03/cncf-archives-the-service-mesh-interface-smi-project/
+    name: CNCF Archived 2023-10-03
+    description: |
+      "The maintainers have decided to consolidate efforts on a service mesh under the
+      auspices of GAMMA under the Kubernetes SIG Network initiative." GitHub org archived
+      and made read-only on 2023-10-20.
+  - type: SuccessorSpecification
+    url: https://gateway-api.sigs.k8s.io/mesh/gamma/
+    name: Kubernetes Gateway API GAMMA Initiative
+    description: |
+      Gateway API GAMMA reached GA in the Standard Channel with v1.1.0 and is the
+      Kubernetes-native successor to SMI for service-mesh configuration.
+  - type: SlackChannel
+    url: https://cloud-native.slack.com
+    name: '#smi (CNCF Slack, archived)'
+  - type: SDK
+    url: https://github.com/servicemeshinterface/smi-sdk-go
+    name: smi-sdk-go (Go, archived)
+  - type: SDK
+    url: https://github.com/servicemeshinterface/smi-controller-sdk
+    name: smi-controller-sdk (Go controller SDK, archived)
+  - type: ReferenceImplementation
+    url: https://github.com/servicemeshinterface/smi-metrics
+    name: smi-metrics (TrafficMetrics API server, archived)
+  - type: ReferenceImplementation
+    url: https://github.com/servicemeshinterface/smi-adapter-istio
+    name: smi-adapter-istio (Istio adapter, archived)
+  - type: ReferenceImplementation
+    url: https://github.com/servicemeshinterface/istio-smi-controller
+    name: istio-smi-controller (example controller, archived)
+  - type: KnownImplementation
+    name: Linkerd
+    url: https://linkerd.io
+  - type: KnownImplementation
+    name: Open Service Mesh (OSM)
+    url: https://openservicemesh.io
+  - type: KnownImplementation
+    name: Consul Connect
+    url: https://www.consul.io/docs/connect
+  - type: KnownImplementation
+    name: Traefik Mesh
+    url: https://traefik.io/traefik-mesh/
+  - type: KnownImplementation
+    name: Gloo Mesh
+    url: https://www.solo.io/products/gloo-mesh/
+  - type: KnownImplementation
+    name: Flagger
+    url: https://flagger.app
+  - type: KnownImplementation
+    name: Meshery
+    url: https://meshery.io
+  - type: KnownImplementation
+    name: Argo Rollouts (TrafficSplit support)
+    url: https://argoproj.github.io/rollouts/
+  - type: JSONSchema
+    url: ./json-schema/
+  - type: JSONLD
+    url: ./json-ld/service-mesh-interface-context.jsonld
+  - type: Vocabulary
+    url: ./vocabulary/service-mesh-interface-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+
+apis:
+  - name: SMI Traffic Access Control
+    description: |
+      Traffic Access Control defines the `TrafficTarget` resource, which associates a set
+      of traffic rules with a service identity allocated to a group of pods. It is the
+      authorization layer of SMI: which source identities may speak which protocols/routes
+      to which destination identity. Per the spec, "a valid TrafficTarget must specify a
+      destination, at least one rule, and at least one source."
+    humanURL: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-access/v1alpha3/traffic-access.md
+    aid: smi-traffic-access
+    tags:
+      - Traffic Policy
+      - Access Control
+      - Authorization
+      - Kubernetes CRD
+      - SMI
+    properties:
+      - type: APIVersion
+        name: access.smi-spec.io/v1alpha3
+      - type: Kind
+        name: TrafficTarget
+      - type: Specification
+        url: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-access/v1alpha3/traffic-access.md
+      - type: JSONSchema
+        url: ./json-schema/traffic-target-schema.json
+      - type: Example
+        url: ./examples/traffic-target-example.yaml
+
+  - name: SMI Traffic Specs
+    description: |
+      Traffic Specs describes a set of resources that allow users to specify how their
+      traffic looks. It is used in concert with access control and other policies to
+      concretely define what should happen to specific types of traffic as it flows
+      through the mesh. Defines `HTTPRouteGroup`, `TCPRoute`, and `UDPRoute` resources.
+    humanURL: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-specs/v1alpha4/traffic-specs.md
+    aid: smi-traffic-specs
+    tags:
+      - Traffic Specs
+      - Routing
+      - HTTP
+      - TCP
+      - UDP
+      - Kubernetes CRD
+      - SMI
+    properties:
+      - type: APIVersion
+        name: specs.smi-spec.io/v1alpha4
+      - type: Kind
+        name: HTTPRouteGroup
+      - type: Kind
+        name: TCPRoute
+      - type: Kind
+        name: UDPRoute
+      - type: Specification
+        url: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-specs/v1alpha4/traffic-specs.md
+      - type: JSONSchema
+        url: ./json-schema/http-route-group-schema.json
+      - type: JSONSchema
+        url: ./json-schema/tcp-route-schema.json
+      - type: JSONSchema
+        url: ./json-schema/udp-route-schema.json
+      - type: Example
+        url: ./examples/http-route-group-example.yaml
+      - type: Example
+        url: ./examples/tcp-route-example.yaml
+      - type: Example
+        url: ./examples/udp-route-example.yaml
+
+  - name: SMI Traffic Split
+    description: |
+      Traffic Split defines the `TrafficSplit` resource, which allows users to incrementally
+      direct percentages of traffic between various services. It is the canonical SMI
+      primitive for canary deployments, blue/green rollouts, and A/B testing across a mesh.
+    humanURL: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha4/traffic-split.md
+    aid: smi-traffic-split
+    tags:
+      - Traffic Management
+      - Traffic Splitting
+      - Canary
+      - Blue Green
+      - Progressive Delivery
+      - Kubernetes CRD
+      - SMI
+    properties:
+      - type: APIVersion
+        name: split.smi-spec.io/v1alpha4
+      - type: Kind
+        name: TrafficSplit
+      - type: Specification
+        url: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha4/traffic-split.md
+      - type: JSONSchema
+        url: ./json-schema/traffic-split-schema.json
+      - type: Example
+        url: ./examples/traffic-split-example.yaml
+
+  - name: SMI Traffic Metrics
+    description: |
+      Traffic Metrics is "a resource that provides a common integration point for tools
+      that can benefit by consuming metrics related to HTTP traffic." It is exposed as a
+      Kubernetes APIService extension at `metrics.smi-spec.io/v1alpha1` and reports
+      latency percentiles (p50/p90/p99) and success/failure counts per pod, deployment,
+      namespace, or traffic edge.
+    humanURL: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-metrics/v1alpha1/traffic-metrics.md
+    baseURL: https://kubernetes.default.svc/apis/metrics.smi-spec.io/v1alpha1
+    aid: smi-traffic-metrics
+    tags:
+      - Traffic Metrics
+      - Observability
+      - Telemetry
+      - Kubernetes APIService
+      - SMI
+    properties:
+      - type: APIVersion
+        name: metrics.smi-spec.io/v1alpha1
+      - type: Kind
+        name: TrafficMetrics
+      - type: Kind
+        name: TrafficMetricsList
+      - type: Specification
+        url: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-metrics/v1alpha1/traffic-metrics.md
+      - type: ReferenceImplementation
+        url: https://github.com/servicemeshinterface/smi-metrics
+      - type: JSONSchema
+        url: ./json-schema/traffic-metrics-schema.json
+      - type: Example
+        url: ./examples/traffic-metrics-example.json
+    operations:
+      - method: GET
+        endpoint: /apis/metrics.smi-spec.io/v1alpha1/namespaces/{namespace}/pods
+      - method: GET
+        endpoint: /apis/metrics.smi-spec.io/v1alpha1/namespaces/{namespace}/pods/{name}
+      - method: GET
+        endpoint: /apis/metrics.smi-spec.io/v1alpha1/namespaces/{namespace}/pods/{name}/edges
+      - method: GET
+        endpoint: /apis/metrics.smi-spec.io/v1alpha1/namespaces/{namespace}/deployments
+      - method: GET
+        endpoint: /apis/metrics.smi-spec.io/v1alpha1/namespaces/{namespace}/deployments/{name}
+      - method: GET
+        endpoint: /apis/metrics.smi-spec.io/v1alpha1/namespaces/{namespace}/deployments/{name}/edges
+      - method: GET
+        endpoint: /apis/metrics.smi-spec.io/v1alpha1/namespaces
+
+maintainers:
+  - FN: API Evangelist
+    email: info@apievangelist.com
+    url: https://apievangelist.com

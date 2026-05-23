@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-structure.org/schema/v1",
+  "$id": "https://api-evangelist.github.io/service-mesh-interface/json-structure/service-mesh-interface-structure.json",
+  "title": "Service Mesh Interface (SMI) Structure",
+  "description": "Logical structure of the four SMI API groups and their resource kinds. Documents the conceptual API surface of an archived CNCF specification.",
+  "version": "0.6.0",
+  "status": "archived",
+  "archivalDate": "2023-10-20",
+  "successor": "Kubernetes Gateway API (GAMMA Initiative)",
+  "successorUrl": "https://gateway-api.sigs.k8s.io/mesh/gamma/",
+  "apiGroups": [
+    {
+      "group": "access.smi-spec.io",
+      "version": "v1alpha3",
+      "concern": "Traffic Policy / Authorization",
+      "kinds": ["TrafficTarget"],
+      "relations": {
+        "TrafficTarget.spec.rules": "references specs.smi-spec.io kinds (HTTPRouteGroup, TCPRoute, UDPRoute)",
+        "TrafficTarget.spec.sources": "Kubernetes ServiceAccount references",
+        "TrafficTarget.spec.destination": "Kubernetes ServiceAccount reference"
+      }
+    },
+    {
+      "group": "specs.smi-spec.io",
+      "version": "v1alpha4",
+      "concern": "Traffic Specs / Routing",
+      "kinds": ["HTTPRouteGroup", "TCPRoute", "UDPRoute"],
+      "relations": {
+        "HTTPRouteGroup": "consumed by TrafficTarget.rules and TrafficSplit.matches",
+        "TCPRoute": "consumed by TrafficTarget.rules",
+        "UDPRoute": "consumed by TrafficTarget.rules"
+      }
+    },
+    {
+      "group": "split.smi-spec.io",
+      "version": "v1alpha4",
+      "concern": "Traffic Management / Progressive Delivery",
+      "kinds": ["TrafficSplit"],
+      "relations": {
+        "TrafficSplit.spec.service": "root Kubernetes Service",
+        "TrafficSplit.spec.backends[].service": "backend Kubernetes Service with integer weight",
+        "TrafficSplit.spec.matches": "optional HTTPRouteGroup references for header-based segmentation"
+      }
+    },
+    {
+      "group": "metrics.smi-spec.io",
+      "version": "v1alpha1",
+      "concern": "Traffic Telemetry / Observability",
+      "kinds": ["TrafficMetrics", "TrafficMetricsList"],
+      "exposure": "Kubernetes APIService aggregation layer at /apis/metrics.smi-spec.io/v1alpha1",
+      "scopedResources": ["Pod", "Deployment", "Namespace"],
+      "metrics": [
+        "p99_response_latency",
+        "p90_response_latency",
+        "p50_response_latency",
+        "success_count",
+        "failure_count"
+      ]
+    }
+  ]
+}

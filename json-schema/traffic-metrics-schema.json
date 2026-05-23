@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/service-mesh-interface/json-schema/traffic-metrics-schema.json",
+  "title": "SMI TrafficMetrics",
+  "description": "Service Mesh Interface (SMI) TrafficMetrics resource (metrics.smi-spec.io/v1alpha1). Provides a common integration point for tools consuming metrics related to HTTP traffic, exposed via a Kubernetes APIService. Source: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-metrics/v1alpha1/traffic-metrics.md",
+  "type": "object",
+  "required": ["kind", "resource"],
+  "properties": {
+    "kind": { "const": "TrafficMetrics" },
+    "apiVersion": { "const": "metrics.smi-spec.io/v1alpha1" },
+    "resource": {
+      "type": "object",
+      "required": ["name", "namespace", "kind"],
+      "properties": {
+        "name": { "type": "string" },
+        "namespace": { "type": "string" },
+        "kind": { "type": "string", "enum": ["Pod", "Namespace", "Deployment", "StatefulSet", "DaemonSet", "Service"] }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "description": "Optional traffic edge (source resource for the observed traffic).",
+      "properties": {
+        "direction": { "type": "string", "enum": ["to", "from"] },
+        "side": { "type": "string", "enum": ["client", "server"] },
+        "resource": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "namespace": { "type": "string" },
+            "kind": { "type": "string" }
+          }
+        }
+      }
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "window": {
+      "type": "string",
+      "description": "ISO-8601-style duration window (e.g. '30s')."
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "value"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "p99_response_latency",
+              "p90_response_latency",
+              "p50_response_latency",
+              "success_count",
+              "failure_count"
+            ]
+          },
+          "unit": { "type": "string" },
+          "value": { "type": "string" }
+        }
+      }
+    }
+  }
+}
