@@ -75,10 +75,10 @@ common:
   - type: SlackChannel
     url: https://cloud-native.slack.com
     name: '#smi (CNCF Slack, archived)'
-  - type: SDK
+  - type: SDKs
     url: https://github.com/servicemeshinterface/smi-sdk-go
     name: smi-sdk-go (Go, archived)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/servicemeshinterface/smi-controller-sdk
     name: smi-controller-sdk (Go controller SDK, archived)
   - type: ReferenceImplementation
@@ -148,7 +148,7 @@ apis:
         url: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-access/v1alpha3/traffic-access.md
       - type: JSONSchema
         url: ./json-schema/traffic-target-schema.json
-      - type: Example
+      - type: Examples
         url: ./examples/traffic-target-example.yaml
 
   - name: SMI Traffic Specs
@@ -184,11 +184,11 @@ apis:
         url: ./json-schema/tcp-route-schema.json
       - type: JSONSchema
         url: ./json-schema/udp-route-schema.json
-      - type: Example
+      - type: Examples
         url: ./examples/http-route-group-example.yaml
-      - type: Example
+      - type: Examples
         url: ./examples/tcp-route-example.yaml
-      - type: Example
+      - type: Examples
         url: ./examples/udp-route-example.yaml
 
   - name: SMI Traffic Split
@@ -215,7 +215,7 @@ apis:
         url: https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha4/traffic-split.md
       - type: JSONSchema
         url: ./json-schema/traffic-split-schema.json
-      - type: Example
+      - type: Examples
         url: ./examples/traffic-split-example.yaml
 
   - name: SMI Traffic Metrics
@@ -247,7 +247,7 @@ apis:
         url: https://github.com/servicemeshinterface/smi-metrics
       - type: JSONSchema
         url: ./json-schema/traffic-metrics-schema.json
-      - type: Example
+      - type: Examples
         url: ./examples/traffic-metrics-example.json
     operations:
       - method: GET
