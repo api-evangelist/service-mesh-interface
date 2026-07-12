@@ -45,6 +45,8 @@ type: Index
 aid: service-mesh-interface
 access: 3rd-Party
 common:
+  - type: DomainSecurity
+    url: security/service-mesh-interface-domain-security.yml
   - type: Website
     url: https://smi-spec.io
   - type: Specification
