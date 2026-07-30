@@ -26,6 +26,17 @@ description: |
   (c) migrate off SMI to Gateway API.
 url: https://github.com/api-evangelist/service-mesh-interface
 humanURL: https://smi-spec.io
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
 image: https://avatars.githubusercontent.com/u/59054423
 tags:
   - Service Mesh
