@@ -51,7 +51,7 @@ tags:
   - Custom Resource Definitions
 created: '2026-05-22'
 modified: '2026-05-23'
-specificationVersion: '0.18'
+specificationVersion: '0.23'
 type: Index
 aid: service-mesh-interface
 access: 3rd-Party
