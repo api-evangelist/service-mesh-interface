@@ -215,6 +215,14 @@ apis:
       - Traffic Management
       - Traffic Splitting
       - Canary
+      - Blue-Green
+      - Progressive Delivery
+      - Kubernetes CRD
+      - SMI
+    tags_raw:
+      - Traffic Management
+      - Traffic Splitting
+      - Canary
       - Blue Green
       - Progressive Delivery
       - Kubernetes CRD
