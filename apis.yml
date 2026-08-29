@@ -26,6 +26,18 @@ description: |
   (c) migrate off SMI to Gateway API.
 url: https://github.com/api-evangelist/service-mesh-interface
 humanURL: https://smi-spec.io
+deliveryModel:
+  model: self-hosted
+  license: Apache-2.0
+  open_source: true
+  commercial: false
+  callable_host: false
+  label: Self-hosted open source · you run it yourself
+  confidence: high
+  source:
+  - license
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -56,6 +68,12 @@ type: Index
 aid: service-mesh-interface
 access: 3rd-Party
 common:
+  - type: IssueTracker
+    url: https://github.com/servicemeshinterface/smi-spec/issues
+  - type: Releases
+    url: https://github.com/servicemeshinterface/smi-spec/releases
+  - type: ContributionGuide
+    url: https://github.com/servicemeshinterface/smi-spec/blob/main/CONTRIBUTING.md
   - type: DomainSecurity
     url: security/service-mesh-interface-domain-security.yml
   - type: Website
