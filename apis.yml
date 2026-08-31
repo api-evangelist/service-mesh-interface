@@ -233,7 +233,7 @@ apis:
       - Traffic Management
       - Traffic Splitting
       - Canary
-      - Blue-Green
+      - Blue Green
       - Progressive Delivery
       - Kubernetes CRD
       - SMI
