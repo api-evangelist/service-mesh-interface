@@ -34,6 +34,42 @@ edges:
     detected: '2026-10-19'
   detected_by: sweep-cloud-native.py
   first_seen: '2026-10-15'
+- partner_name: OpenSSF Best Practices Badge (bestpractices.dev)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.bestpractices.dev/en/projects/3801
+  category: OpenSSF Best Practices badge (open-source project security practices)
+  contract_reference:
+    register: OpenSSF Best Practices Badge projects (www.bestpractices.dev/en/projects.json)
+    standard: OpenSSF Best Practices Badge criteria (passing / silver / gold)
+    spec_file: null
+    role: badged-project-owner
+    registered_name: Service Mesh Interface specification
+    matched_domain: smi-spec.io
+    matched_by: domain
+    certified_products:
+    - product: open-source project
+      product_type: open-source project
+      standard: OpenSSF Best Practices Badge criteria (passing / silver / gold)
+      partner_tier: passing
+      lapsed: false
+      badge_date: '2020-03-23'
+    badged_projects:
+    - name: Service Mesh Interface specification
+      id: 3801
+      badge: passing
+      url: https://www.bestpractices.dev/en/projects/3801
+    signal_note: 'certified_products = ONE entry per provider (product type open-source project): highest current
+      OpenSSF Best Practices badge level in partner_tier, earliest date at that level; lapsed: true when every linked
+      project lost its badge. badged_projects is context, never counted'
+    detected_by: sweep-openssf-best-practices-badges.py
+    detected: '2026-10-22'
+  detected_by: sweep-openssf-best-practices-badges.py
+  first_seen: '2026-10-22'
 generated: '2026-10-15'
 method: searched
 source:
@@ -43,3 +79,4 @@ checked:
 - https://focus.finops.org/data-generators/
 - https://github.com/cncf/k8s-conformance
 - https://github.com/cncf/landscape
+- https://www.bestpractices.dev/en/projects.json?page=N
